@@ -19,11 +19,6 @@ export default {
       http: {
         method: 'post',
         path: 'route2',
-        request: {
-          schemas: {
-            'application/json': schema,
-          },
-        },
       },
     },
   ],

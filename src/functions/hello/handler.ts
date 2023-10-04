@@ -17,6 +17,7 @@ const hello: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (event) =
       case '/route2':
         response = {
          message: 'Invoked from the route /route2',
+         body: event.body
         };
         break;
       default:
