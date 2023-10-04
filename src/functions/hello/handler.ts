@@ -5,10 +5,29 @@ import { middyfy } from '@libs/lambda';
 import schema from './schema';
 
 const hello: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (event) => {
-  return formatJSONResponse({
-    message: `Hello ${event.body.name}, welcome to the exciting Serverless world!`,
-    event,
-  });
+  try {
+    const { path } = event;
+    let response = null;
+    switch (path) {
+      case '/hello':
+        response = {
+          message: 'Invoked from the route /hello',
+        };
+        break;
+      case '/route2':
+        response = {
+         message: 'Invoked from the route /route2',
+        };
+        break;
+      default:
+        response = 'Not found'
+        break;
+    }
+    return formatJSONResponse(response);
+  } catch (error) {
+    console.log(error);
+  }
+
 };
 
 export const main = middyfy(hello);
